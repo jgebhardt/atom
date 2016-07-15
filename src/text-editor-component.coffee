@@ -272,6 +272,9 @@ class TextEditorComponent
     lastKeydownBeforeKeypress = null
 
     @domNode.addEventListener 'keydown', (event) =>
+      # Prevent scrolling down the page
+      if @editor.isMini() && event.keyCode == 32
+        event.preventDefault()
       if lastKeydownBeforeKeypress
         if lastKeydownBeforeKeypress.keyCode is event.keyCode
           @openedAccentedCharacterMenu = true
